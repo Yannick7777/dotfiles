@@ -47,4 +47,9 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias sync-mirrors='sudo systemctl restart reflector.service && cat /etc/pacman.d/mirrorlist'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
+
+# Will probably get migrated into a setup script in the future:
+dotfiles config --local status.showUntrackedFiles no
+
+
 tty | grep -q 'tty' && Hyprland || fastfetch --config examples/16 ; eval "$(starship init zsh)"
