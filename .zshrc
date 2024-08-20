@@ -1,3 +1,7 @@
+## Variables
+
+vpn_config_location="$HOME/Documents/vpn.config.conf"
+
 
 # The following lines were added by compinstall
 
@@ -38,11 +42,11 @@ alias grep='grep --color=auto'
 alias open='xdg-open'
 alias ff='fastfetch --config examples/16'
 alias hf='hyfetch'
-alias publicip='curl --silent ifconfig.me || echo "No connection"'
-alias vpn-up='wg-quick up ~/Documents/vpn.config.conf && printf "VPN connected. \nNew public IP: $(curl --silent ifconfig.me)" || echo "Was not able to connect to VPN."'
-alias vpn-reup='wg-quick up ~/Documents/vpn.config.conf && printf "VPN connected. \nNew public IP: $(curl --silent ifconfig.me)" || (echo "VPN is already active. Reconnecting..." && wg-quick down ~/Documents/vpn.config.conf && wg-quick up ~/Documents/vpn.config.conf && printf "VPN reconnected. \nNew public IP: $(curl --silent ifconfig.me)" || echo "Was not able to connect to VPN.")'
-alias vpn-down='wg-quick down ~/Documents/vpn.config.conf && printf "VPN disconnected. \nNew public IP: $(curl --silent ifconfig.me)"'
-alias vpn-status='sudo wg show'
+alias publicip='printf "$(curl --silent ifconfig.me || echo "No connection")\n"'
+alias vpn-up='wg-quick up $vpn_config_location && printf "VPN connected. \nNew public IP: $(curl --silent ifconfig.me)\n" || echo "Was not able to connect to VPN."'
+alias vpn-reup='wg-quick up $vpn_config_location && printf "VPN connected. \nNew public IP: $(curl --silent ifconfig.me)\n" || (echo "VPN is already active. Reconnecting..." && wg-quick down $vpn_config_location && wg-quick up $vpn_config_location && printf "VPN reconnected. \nNew public IP: $(curl --silent ifconfig.me)\n" || echo "Was not able to connect to VPN.")'
+alias vpn-down='wg-quick down $vpn_config_location && printf "VPN disconnected. \nNew public IP: $(curl --silent ifconfig.me)\n"'
+alias vpn-status='wgshow=$(sudo wg show) ; echo $wgshow | grep -qs "interface" && printf "$wgshow \nVPN connected. \nPublic IP: $(curl --silent ifconfig.me)\n" || echo "VPN disconnected. \nPublic IP: $(curl --silent ifconfig.me)\n"'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias sync-mirrors='sudo systemctl restart reflector.service && cat /etc/pacman.d/mirrorlist'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
