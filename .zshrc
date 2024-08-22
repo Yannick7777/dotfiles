@@ -50,7 +50,7 @@ alias vpn-status='wgshow=$(sudo wg show) ; echo $wgshow | grep -qs "interface" &
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias sync-mirrors='sudo systemctl restart reflector.service && cat /etc/pacman.d/mirrorlist'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
+alias yay='yay --aur'
 
 # Will probably get migrated into a setup script in the future:
 dotfiles config --local status.showUntrackedFiles no
