@@ -31,6 +31,7 @@ bindkey "^[[3~" delete-char
 
 
 export EDITOR=nvim
+export PATH=$PATH:~/.config/composer/vendor/bin
 
 ## Aliases
 alias fucking='sudo'
