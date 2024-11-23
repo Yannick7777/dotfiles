@@ -58,3 +58,6 @@ dotfiles config --local status.showUntrackedFiles no
 
 
 tty | grep -q 'tty' && Hyprland || fastfetch --config examples/16 ; eval "$(starship init zsh)"
+
+# Created by `pipx` on 2024-11-23 17:16:17
+export PATH="$PATH:/home/melody/.local/bin"
