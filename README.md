@@ -7,7 +7,7 @@
 
 ## How to install Dotfiles:
 - Make sure you installed Hyprland and all programs listed in hyprland.conf
-- Run `alias dotfiles=/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME`
+- Run `alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'`
 - Run `git clone --bare https://github.com/Yannick7777/dotfiles.git $HOME/dotfiles`
 - Run `dotfiles config --local status.showUntrackedFiles no`
 - Run `dotfiles checkout`
