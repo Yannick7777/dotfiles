@@ -108,6 +108,9 @@ fastfetch --config examples/16
 
 # export XDG_CURRENT_DESKTOP=sway
 alias ledger-shell="ledger-agent ~/.ssh/ledger.conf -s -v"
+alias dcd="docker compose down"
+alias dcu="docker compose up"
+alias dcud="docker compose up -d"
 
 # Created by `pipx` on 2024-11-22 13:27:16
 export PATH="$PATH:/home/melody/.local/bin"
