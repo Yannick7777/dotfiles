@@ -109,8 +109,8 @@ fastfetch --config examples/16
 # export XDG_CURRENT_DESKTOP=sway
 alias ledger-shell="ledger-agent ~/.ssh/ledger.conf -s -v"
 alias dcd="docker compose down"
-alias dcu="docker compose up"
-alias dcud="docker compose up -d"
+alias dcu='UID="$(id -u)" GID="$(id -g)" docker compose up'
+alias dcud='UID="$(id -u)" GID="$(id -g)" docker compose up -d'
 alias needssh="git remote set-url origin \$(git remote get-url origin | sed -e 's|https://github.com/|git@github.com:|' -e 's|/$||' -e 's|\.git$||')"
 
 # Created by `pipx` on 2024-11-22 13:27:16
