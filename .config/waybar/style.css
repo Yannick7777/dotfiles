@@ -56,7 +56,8 @@ button:focused {
 
 /* you can set a style on hover for any module like this */
 #pulseaudio:hover {
-    background-color: #a37800;
+    background-color: #2E325A;
+
 }
 
 #workspaces button {
@@ -120,17 +121,18 @@ button:focused {
 }
 
 #clock {
-    background-color: #64727D;
+    background-color: #2E325A;
+    color: #DfDfff;
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #2E325A;
+    color: #DfDfff;
 }
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 @keyframes blink {
@@ -142,7 +144,7 @@ button:focused {
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
+    background-color: #2E325A;
     color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -175,12 +177,13 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #memory {
-    background-color: #9b59b6;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #disk {
@@ -188,34 +191,38 @@ label:focus {
 }
 
 #backlight {
-    background-color: #90b1b1;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #network {
-    background-color: #2980b9;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #wireplumber {
-    background-color: #fff0f5;
-    color: #000000;
+    background-color: #2E325A;
+    color: #DfDfff;
 }
 
 #wireplumber.muted {
-    background-color: #f53c3c;
+    background-color: #2E325A;
+    color: #DfDfff;
 }
 
 #custom-media {
@@ -233,15 +240,17 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
+    color: #DfDfff;
+    background-color: #2E325A;
 }
 
 #tray {
-    background-color: #2980b9;
+    background-color: #2E325A;;
 }
 
 #tray > .passive {
