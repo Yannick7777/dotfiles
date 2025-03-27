@@ -114,6 +114,7 @@ alias dcud='UID="$(id -u)" GID="$(id -g)" docker compose up -d'
 alias dbounce='docker compose down && dcud'
 alias needssh="git remote set-url origin \$(git remote get-url origin | sed -e 's|https://github.com/|git@github.com:|' -e 's|/$||' -e 's|\.git$||')"
 alias icat="kitten icat"
+alias marptohtml="npx @marp-team/marp-cli@latest --theme-set themes/mytheme.css - template.md -o index.html"
 
 # Created by `pipx` on 2024-11-22 13:27:16
 export PATH="$PATH:/home/melody/.local/bin"
