@@ -1,0 +1,71 @@
+# Use in crontab like this: 
+
+# */5	* 	*	*	*	zsh -c "export $(</proc/$(pidof Hyprland)/environ tr \\0 \\n | grep -E '^DBUS_SESSION_BUS_ADDRESS=') ; source ~/.config/shellfunctions/fs_sync_offline && fs_sync_offline"
+
+fs_sync_offline() {
+    local source1="filesync:/files"
+    local source2="$HOME/.offline_filesync"
+    local filter_file="$source2/.important-files.txt"
+    local bisync_log="$source2/.bisync_log.txt"
+    local notification_header="OfflineFileSync"
+
+    if timeout 2 curl shork.ch || timeout 2 curl status.shork.ch; then
+    else
+        return 1
+    fi
+
+
+    functions -T send_message # Scoping
+    send_message() {
+        echo "$1"
+        notify-send "$notification_header" "$1"
+        echo "$(date +"%Y-%m-%d %H:%M:%S"): $1" >> "$bisync_log"
+    }
+    case $1 in
+        init)
+            rclone copyto "$source1/.important-files.txt" "$source2/.important-files.txt" \
+                --verbose
+            rclone bisync "$source1" "$source2" \
+                --create-empty-src-dirs \
+                --timeout 2s \
+                --filter-from "$filter_file" \
+                --resync \
+                --verbose
+            return 1
+    esac
+
+
+    rclone bisync "$source1" "$source2" \
+        --create-empty-src-dirs \
+        --conflict-resolve newer \
+        --conflict-loser num \
+        --timeout 2s \
+        --resilient \
+        --recover \
+        --filter-from "$filter_file" 2>&1 | while IFS= read -r line; do
+
+        if [[ "$line" == *conflict* && "$line" == *home* ]]; then
+            # Extract the path from the colored output
+            local extracted_path=$(echo "$line" | sed -n 's/.*\x1b\[36m\(.*\)\x1b\[0m.*/\1/p')
+
+            # Remove ".conflict{number}" from the path
+            local cleaned_path=$(echo "$extracted_path" | sed 's/\.conflict[0-9]*//g')
+
+            if [[ -n "$cleaned_path" ]]; then
+                send_message "Conflict at $cleaned_path"
+            fi
+        fi
+
+        if [[ "$line" == *"prior lock file found"* ]]; then
+            send_message "Lockfile present. Not synchronising."
+        fi
+
+        if [[ "$line" == *"too many deletes"* ]]; then
+            send_message "Too many deletes. Not synchronising."
+        fi
+
+        if [[ "$line" == *"critical"* ]]; then
+            send_message "Critical Error. Resync required!"
+        fi
+    done
+}

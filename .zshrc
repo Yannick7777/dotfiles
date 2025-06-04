@@ -105,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 
 fastfetch --config examples/16
+# fastfetch --config examples/16 --kitty-direct ~/Pictures/shork.png --logo-width 25 --logo-height 10
 
 # export XDG_CURRENT_DESKTOP=sway
 alias ledger-shell="ledger-agent ~/.ssh/ledger.conf -s -v"
@@ -114,10 +115,17 @@ alias dcud='UID="$(id -u)" GID="$(id -g)" docker compose up -d'
 alias dbounce='docker compose down && dcud'
 alias needssh="git remote set-url origin \$(git remote get-url origin | sed -e 's|https://github.com/|git@github.com:|' -e 's|/$||' -e 's|\.git$||')"
 alias icat="kitten icat --background white"
-alias marptohtml="npx @marp-team/marp-cli@latest --theme-set themes/mytheme.css - template.md -o index.html"
+alias marptohtml="npx @marp-team/marp-cli@latest --html --theme-set themes/mytheme.css - template.md -o index.html"
+alias fs="sudo rc-service filesync"
+alias fs-sync='kill -SIGHUP "$(cat /run/filesync.pid)"'
+alias fs-sync-offline='rclone bisync filesync:/files ~/.offline_filesync --conflict-resolve newer --conflict-loser num --timeout 2s --filter-from ~/.offline_filesync/.important-files.txt 2>&1 | grep conflict | grep home | sed -n "s/.*\x1b\[36m\([^[:cntrl:]]*\)\x1b\[0m.*/\1/p" | while read -r conflict; do notify-send "Conflict at $conflict"; echo "Conflict at $conflict" >> ~/.offline_filesync/.conflict_log.txt; done'
+alias fs-sync-offline-init='cd ~; rm -rf .offline_filesync; mkdir .offline_filesync; rclone copyto filesync:/files/.important-files.txt ~/.offline_filesync/.important-files.txt --verbose && rclone bisync filesync:/files ~/.offline_filesync --conflict-resolve newer --conflict-loser num --timeout 2s --filter-from ~/.offline_filesync/.important-files.txt --verbose --resync'
+
+source ~/.config/shellfunctions/fs_sync_offline.sh
 
 # Created by `pipx` on 2024-11-22 13:27:16
 export PATH="$PATH:/home/melody/.local/bin"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
+source <(fzf --zsh)
