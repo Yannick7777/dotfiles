@@ -118,6 +118,7 @@ alias needssh="git remote set-url origin \$(git remote get-url origin | sed -e '
 alias icat="kitten icat --background white"
 alias marptohtml="npx @marp-team/marp-cli@latest --html --theme-set themes/mytheme.css - template.md -o index.html"
 alias output-on-all-devices="pactl load-module module-combine-sink"
+alias remove-exif="exiftool -all= -overwrite_original"
 alias fs="sudo rc-service filesync"
 alias fs-sync='kill -SIGHUP "$(cat /run/filesync.pid)"'
 alias fs-sync-offline='rclone bisync filesync:/files ~/.offline_filesync --conflict-resolve newer --conflict-loser num --timeout 2s --filter-from ~/.offline_filesync/.important-files.txt 2>&1 | grep conflict | grep home | sed -n "s/.*\x1b\[36m\([^[:cntrl:]]*\)\x1b\[0m.*/\1/p" | while read -r conflict; do notify-send "Conflict at $conflict"; echo "Conflict at $conflict" >> ~/.offline_filesync/.conflict_log.txt; done'
@@ -131,3 +132,4 @@ export PATH="$PATH:/home/melody/.local/bin"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 source <(fzf --zsh)
+eval $(thefuck --alias)
