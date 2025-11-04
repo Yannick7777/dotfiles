@@ -109,6 +109,7 @@ fastfetch --config examples/16
 
 # export XDG_CURRENT_DESKTOP=sway
 alias ledger-shell="ledger-agent ~/.ssh/ledger.conf -s -v"
+alias ostui="ostui --mpris"
 alias dcd="docker compose down"
 alias dcu='UID="$(id -u)" GID="$(id -g)" docker compose up'
 alias dcud='UID="$(id -u)" GID="$(id -g)" docker compose up -d'
