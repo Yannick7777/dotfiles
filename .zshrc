@@ -128,7 +128,7 @@ alias fs-sync-offline-init='cd ~; rm -rf .offline_filesync; mkdir .offline_files
 source ~/.config/shellfunctions/fs_sync_offline.sh
 
 # Created by `pipx` on 2024-11-22 13:27:16
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
