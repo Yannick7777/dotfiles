@@ -133,4 +133,3 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 source <(fzf --zsh)
-eval $(thefuck --alias)
